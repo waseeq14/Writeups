@@ -22,7 +22,8 @@ During static analysis of the Config Editor APK, I discovered an unsafe YAML des
 ## Recon / Initial Observations
 
 - I installed and launched the APK on an emulator. The app presents a minimal UI with two buttons: **Load** and **Save**.
-    ![[Screenshot 2025-09-26 at 4.00.34 PM.png]]
+    <img width="846" height="1492" alt="dummy" src="https://github.com/user-attachments/assets/36f71114-f522-4758-9e73-509fd468f004" />
+
 - To understand the application behavior I decompiled the APK with JADX and inspected the main activity and related classes.
     
 
@@ -35,11 +36,13 @@ During static analysis of the Config Editor APK, I discovered an unsafe YAML des
     - The app parses YAML files as part of its load/save functionality.
         
     - Investigation of the decompiled code revealed the SnakeYAML library is in use for parsing.
-        ![[Screenshot 2025-09-26 at 4.01.19 PM.png]]
+        <img width="2050" height="874" alt="dummy" src="https://github.com/user-attachments/assets/76ee17a4-33cc-4558-addc-7138c7f76dc3" />
+
 1. **LegacyCommandUtil — command execution sink**
     
     - Further analysis exposed an activity/class named `LegacyCommandUtil` which accepts a command and executes it.
-        ![[Screenshot 2025-09-26 at 4.01.33 PM.png]]
+        <img width="1582" height="660" alt="dummy" src="https://github.com/user-attachments/assets/fea89e05-1a68-4e8d-9092-555045fa178b" />
+
     - The combination of a YAML parser and a class able to execute commands indicates a potentially exploitable deserialization path.
         
 1. **Known SnakeYAML vulnerability**
@@ -58,7 +61,8 @@ Using the YAML deserialization sink to instantiate and invoke the legacy command
 ```
 
 After supplying the above payload to the parser (via the app's Load functionality or by placing crafted YAML where the app reads it), a new file named `haha.txt` is created under the app's files directory, demonstrating successful command execution.
-![[Screenshot 2025-09-26 at 4.03.24 PM.png]]
+<img width="1360" height="174" alt="dummy" src="https://github.com/user-attachments/assets/e314cc3d-2e74-476f-94ae-c454beaa119d" />
+
 
 ---
 
