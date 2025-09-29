@@ -16,7 +16,7 @@
 ---
 
 ## Vulnerable code 
-![[Screenshot 2025-09-29 at 10.40.52 AM.png]]
+![](../../47f2487de127e6e14c96601d0d90f1f5.png)
 
 ```java
 String sql = "INSERT INTO users (username, password, address, isPro) VALUES ('" + Username + "', '" + encodedPassword + "', '" + encodedAddress + "', 0)";
@@ -41,7 +41,7 @@ Tuple injection is preferred for reliability.
 ---
 
 ## Payload used 
-![[Screenshot 2025-09-29 at 10.37.55 AM.png]]
+![](../../d470c7f50bed521cdabed33553b30c1b.png)
 
 When registering in the app, the following string was entered in the **username** field:
 
@@ -85,7 +85,7 @@ Everything after `--` is ignored, so the DB inserts the attacker-specified row w
 - Password: `password` (because `cGFzc3dvcmQ=` decodes to `password`)
     
 - Address: `addr` (because `YWRkcg==` decodes to `addr`)
-![[Screenshot 2025-09-29 at 10.39.14 AM.png]]
+![](../../7025966d3e4aa8414d51267989d121d2.png)
 
 Login using the app’s login flow with `gus` / `password` — the account shows as **Pro**. (10,000 credits)
 
