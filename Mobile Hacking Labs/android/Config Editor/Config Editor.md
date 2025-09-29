@@ -1,4 +1,4 @@
-# Config Editor — SnakeYAML Deserialization RCE
+# Config Editor - SnakeYAML Deserialization RCE
 
 **Target:** Mobile Hacking Lab — _Config Editor_ (APK)
 
