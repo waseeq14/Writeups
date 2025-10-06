@@ -22,9 +22,9 @@ I solved it using both approaches, I recommend doing the 2nd one (using frida) a
 - App package: `com.mobilehackinglab.iotconnect`
     
 - The app registers a runtime `BroadcastReceiver` for action `MASTER_ON`. The receiver reads an integer extra named `key` and calls `Checker.check_key(key)`. If true → `turnOnAllDevices()` updates many `SharedPreferences` keys to `true`.
-    ![](../../res/Screenshot%202025-09-29%20at%201.24.51%20PM.png)
+    ![](../../res/1cf0dae049f756aaaa99608120303597.png)
 - Hardcoded cipher text: `OSnaALIWUkpOziVAMycaZQ==` (variable `ds` in `Checker`).
-    ![](../../res/Screenshot%202025-09-29%20at%202.58.11%20PM.png)
+    ![](../../res/b28cd24e3e4b63b0453394bd77965cc1.png)
 - Crypto: `AES/ECB/PKCS5Padding`, key derived from string form of integer PIN left-justified into 16 bytes (e.g. `"345"` → bytes `33 34 35 00 ... 00`).
     
 Files referenced in code:
@@ -189,7 +189,7 @@ print(f" Plaintext: {found_plain}")
 
 ## Result
 
- ![](../../res/Screenshot%202025-09-29%20at%202.48.42%20PM.png)
+ ![](../../res/c35d798f85a8ce951e243c27b921bde6.png)
 
 ## Using the key
 
@@ -250,17 +250,17 @@ send("[!] error: " + e);
 
 ## Hooking the method
 
-![](../../res/Screenshot%202025-09-29%20at%202.44.12%20PM.png)
+![](../../res/384855cf1f4693d307e21feb65fe916e.png)
 This spawns the app with the hook already loaded. 
 
 ## After hooking
 
 You can send a broadcast with any key:
-![](../../res/Screenshot%202025-09-29%20at%202.45.28%20PM.png)
+![](../../res/be3dad97982587ade82bdf4596a36acd.png)
 
 The hooked `check_key` will return `true`, causing the master switch to activate.
-![](../../res/Screenshot%202025-09-29%20at%202.45.42%20PM.png)
-![](../../res/Screenshot%202025-09-29%20at%202.46.08%20PM.png)
+![](../../res/2c8d497c8d42b41ddd92375f382d3c05.png)
+![](../../res/65367c3a54c897d1cb59a76ed72c4611.png)
 
 AC is on brrrrrrr
 
